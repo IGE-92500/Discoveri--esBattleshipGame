@@ -1,10 +1,13 @@
 # DiscoveriesBattleshipGame
 
-Grupo TP06-8
-Nuno Venâncio - 92500 - IGE-PL
-Marta Fonseca - 110886 - IGE
+## Grupo: TP06-8
 
- # Tipos de Navios (Versão Descobrimentos)
+| Curso   | Nº Aluno   | Nome               |
+|--------|------------|--------------------|
+| IGE    | 92500      | Nuno Venâncio      |
+| IGE    | 110886     | Marta Fonseca      |
+
+ ## Tipos de Navios 
 
 | Nome Atual        | Descobrimentos | Nome (EN) | Tamanho | Quantidade |
 |------------------|----------------|-----------|---------|------------|
@@ -15,7 +18,7 @@ Marta Fonseca - 110886 - IGE
 | Submarino        | Barca          | Barge     | 1       | 4          |
 
 
-# Regras do Jogo
+## Regras do Jogo
 
 - Cada jogador tem duas grelhas 10x10:
   - a sua frota - o tabuleiro do adversário
