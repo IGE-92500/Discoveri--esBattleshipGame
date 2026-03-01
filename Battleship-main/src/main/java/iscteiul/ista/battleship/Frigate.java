@@ -1,5 +1,6 @@
 /**
- *
+ * Representa uma Fragata, um tipo específico de navio no jogo Battleship.
+ * Uma Fragata tem um tamanho fixo de 4 e é inicializada com uma direção e posição específicas.
  */
 package iscteiul.ista.battleship;
 
@@ -8,8 +9,12 @@ public class Frigate extends Ship {
     private static final String NAME = "Fragata";
 
     /**
-     * @param bearing
-     * @param pos
+     * Constrói uma Fragata com a direção e posição especificadas.
+     * As posições ocupadas pela Fragata são calculadas com base na sua direção.
+     *
+     * @param bearing A direção da Fragata (NORTE, SUL, ESTE, OESTE).
+     * @param pos A posição inicial da Fragata.
+     * @throws IllegalArgumentException Se a direção for inválida.
      */
     public Frigate(Compass bearing, IPosition pos) throws IllegalArgumentException {
         super(Frigate.NAME, bearing, pos);
@@ -25,18 +30,16 @@ public class Frigate extends Ship {
                     getPositions().add(new Position(pos.getRow(), pos.getColumn() + c));
                 break;
             default:
-                throw new IllegalArgumentException("ERROR! invalid bearing for thr frigate");
+                throw new IllegalArgumentException("ERRO! Direção inválida para a fragata");
         }
     }
 
-    /*
-     * (non-Javadoc)
+    /**
+     * Retorna o tamanho da Fragata.
      *
-     * @see battleship.Ship#getSize()
+     * @return O tamanho da Fragata, que é sempre 4.
      */
-    @Override
     public Integer getSize() {
         return Frigate.SIZE;
     }
-
 }

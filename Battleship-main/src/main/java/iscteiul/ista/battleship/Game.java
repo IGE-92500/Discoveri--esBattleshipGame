@@ -1,5 +1,5 @@
 /**
- *
+ * Representa o jogo Battleship, gerenciando a frota, os tiros disparados e as estatísticas.
  */
 package iscteiul.ista.battleship;
 
@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author fba
- *
+ * Classe que implementa a lógica do jogo Battleship.
+ * Gerencia os tiros disparados, a frota e as estatísticas do jogo.
  */
 public class Game implements IGame {
     private IFleet fleet;
@@ -19,27 +19,29 @@ public class Game implements IGame {
     private Integer countHits;
     private Integer countSinks;
 
-
     /**
-     * @param fleet
+     * Construtor da classe Game.
+     *
+     * @param fleet A frota de navios a ser usada no jogo.
      */
     public Game(IFleet fleet) {
-        shots = new ArrayList<>();
+        shots = new ArrayList<IPosition>();
         countInvalidShots = 0;
         countRepeatedShots = 0;
         this.fleet = fleet;
     }
 
-    /*
-     * (non-Javadoc)
+    /**
+     * Dispara um tiro na posição especificada.
      *
-     * @see battleship.IGame#fire(battleship.IPosition)
+     * @param pos A posição onde o tiro será disparado.
+     * @return O navio atingido, se houver, ou null caso contrário.
      */
-    @Override
+
     public IShip fire(IPosition pos) {
         if (!validShot(pos))
             countInvalidShots++;
-        else { // valid shot!
+        else {
             if (repeatedShot(pos))
                 countRepeatedShots++;
             else {
@@ -58,72 +60,84 @@ public class Game implements IGame {
         return null;
     }
 
-    /*
-     * (non-Javadoc)
+    /**
+     * Retorna a lista de tiros disparados.
      *
-     * @see battleship.IGame#getShots()
+     * @return A lista de posições dos tiros disparados.
      */
-    @Override
+
     public List<IPosition> getShots() {
         return shots;
     }
 
-    /*
-     * (non-Javadoc)
+    /**
+     * Retorna o número de tiros repetidos.
      *
-     * @see battleship.IGame#getRepeatedShots()
+     * @return O número de tiros repetidos.
      */
-    @Override
+
     public int getRepeatedShots() {
         return this.countRepeatedShots;
     }
 
-    /*
-     * (non-Javadoc)
+    /**
+     * Retorna o número de tiros inválidos.
      *
-     * @see battleship.IGame#getInvalidShots()
+     * @return O número de tiros inválidos.
      */
-    @Override
+
     public int getInvalidShots() {
         return this.countInvalidShots;
     }
 
-    /*
-     * (non-Javadoc)
+    /**
+     * Retorna o número de acertos.
      *
-     * @see battleship.IGame#getHits()
+     * @return O número de acertos.
      */
-    @Override
+
     public int getHits() {
         return this.countHits;
     }
 
-    /*
-     * (non-Javadoc)
+    /**
+     * Retorna o número de navios afundados.
      *
-     * @see battleship.IGame#getSunkShips()
+     * @return O número de navios afundados.
      */
-    @Override
+
     public int getSunkShips() {
         return this.countSinks;
     }
 
-    /*
-     * (non-Javadoc)
+    /**
+     * Retorna o número de navios restantes na frota.
      *
-     * @see battleship.IGame#getRemainingShips()
+     * @return O número de navios restantes.
      */
-    @Override
+
     public int getRemainingShips() {
         List<IShip> floatingShips = fleet.getFloatingShips();
         return floatingShips.size();
     }
 
+    /**
+     * Verifica se o tiro na posição especificada é válido.
+     *
+     * @param pos A posição do tiro.
+     * @return true se o tiro for válido, false caso contrário.
+     */
     private boolean validShot(IPosition pos) {
         return (pos.getRow() >= 0 && pos.getRow() <= Fleet.BOARD_SIZE && pos.getColumn() >= 0
                 && pos.getColumn() <= Fleet.BOARD_SIZE);
     }
 
+    /**
+     * Verifica se o tiro na posição especificada já foi disparado.
+     *
+     * @param pos A posição do tiro.
+     * @return true se o tiro já foi disparado, false caso contrário.
+     */
     private boolean repeatedShot(IPosition pos) {
         for (int i = 0; i < shots.size(); i++)
             if (shots.get(i).equals(pos))
@@ -131,7 +145,12 @@ public class Game implements IGame {
         return false;
     }
 
-
+    /**
+     * Imprime o tabuleiro com as posições especificadas marcadas com o caractere fornecido.
+     *
+     * @param positions As posições a serem marcadas.
+     * @param marker O caractere usado para marcar as posições.
+     */
     public void printBoard(List<IPosition> positions, Character marker) {
         char[][] map = new char[Fleet.BOARD_SIZE][Fleet.BOARD_SIZE];
 
@@ -147,20 +166,17 @@ public class Game implements IGame {
                 System.out.print(map[row][col]);
             System.out.println();
         }
-
     }
 
-
     /**
-     * Prints the board showing valid shots that have been fired
+     * Imprime o tabuleiro mostrando os tiros válidos disparados.
      */
     public void printValidShots() {
         printBoard(getShots(), 'X');
     }
 
-
     /**
-     * Prints the board showing the fleet
+     * Imprime o tabuleiro mostrando a frota.
      */
     public void printFleet() {
         List<IPosition> shipPositions = new ArrayList<IPosition>();
@@ -170,5 +186,4 @@ public class Game implements IGame {
 
         printBoard(shipPositions, '#');
     }
-
 }
