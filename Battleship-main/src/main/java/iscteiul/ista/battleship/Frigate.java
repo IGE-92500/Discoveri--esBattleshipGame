@@ -8,6 +8,7 @@ public class Frigate extends Ship {
     private static final Integer SIZE = 4;
     private static final String NAME = "Fragata";
 
+
     /**
      * Constrói uma Fragata com a direção e posição especificadas.
      * As posições ocupadas pela Fragata são calculadas com base na sua direção.
