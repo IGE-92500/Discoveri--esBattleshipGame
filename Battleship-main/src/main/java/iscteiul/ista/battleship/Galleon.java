@@ -8,7 +8,6 @@ public class Galleon extends Ship {
     private static final Integer SIZE = 5;
     private static final String NAME = "Galeao";
 
-
     /**
      * Constrói um Galeão com a direção e posição especificadas.
      * As posições ocupadas pelo Galeão são calculadas com base na sua direção.

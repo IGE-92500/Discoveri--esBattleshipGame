@@ -31,7 +31,6 @@ public class Game implements IGame {
         this.fleet = fleet;
     }
 
-
     /**
      * Dispara um tiro na posição especificada.
      *
