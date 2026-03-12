@@ -6,6 +6,8 @@
 |--------|------------|--------------------|
 | IGE    | 92500      | Nuno Venâncio      |
 | IGE    | 110886     | Marta Fonseca      |
+| IGE    | 111105     | Guilherme Calção   |
+| IGE    | xxxxxx     | Afonso Ramos       |
 
  ## Tipos de Navios 
 
