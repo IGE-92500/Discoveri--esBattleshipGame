@@ -22,13 +22,17 @@ jobs:
           java-version: 17
 
       - name: Build project
+        working-directory: Battleship-main
         run: mvn clean compile
 
       - name: Run tests
+        working-directory: Battleship-main
         run: mvn test
 
       - name: Build JAR
+        working-directory: Battleship-main
         run: mvn package
 
       - name: Build Docker image
+        working-directory: Battleship-main
         run: docker build -t battleship-game:latest .
