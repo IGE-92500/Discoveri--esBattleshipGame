@@ -1,34 +1,37 @@
-name: Complete CI/CD Pipeline
+  name: Complete CI/CD Pipeline
 
-on:
-  push:
-    branches:
-      - main
+  on:
+    push:
+      branches:
+        - main
 
-jobs:
-  build-test:
+  jobs:
+    build-test:
+      runs-on: ubuntu-latest
 
-    runs-on: ubuntu-latest
+      steps:
+        - name: Checkout repository
+          uses: actions/checkout@v4
 
-    steps:
+        - name: Setup Java
+          uses: actions/setup-java@v4
+          with:
+            distribution: temurin
+            java-version: 17
 
-      - name: Checkout repository
-        uses: actions/checkout@v4
+        - name: Build project
+          working-directory: Battleship-main
+          run: mvn clean compile
 
-      - name: Setup Java
-        uses: actions/setup-java@v4
-        with:
-          distribution: temurin
-          java-version: 17
+        - name: Run tests
+          working-directory: Battleship-main
+          run: mvn test
 
-      - name: Build project
-        run: mvn clean compile
+        - name: Build JAR
+          working-directory: Battleship-main
+          run: mvn package
 
-      - name: Run tests
-        run: mvn test
+        - name: Build Docker image
+          working-directory: Battleship-main
+          run: docker build -t battleship-game:latest .
 
-      - name: Build JAR
-        run: mvn package
-
-      - name: Build Docker image
-        run: docker build -t battleship-game:latest .
