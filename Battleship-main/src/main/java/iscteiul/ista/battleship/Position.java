@@ -1,26 +1,13 @@
-/**
- * Implementação concreta de {@link IPosition}.
- * <p>
- * Representa uma célula do tabuleiro, identificada por linha e coluna.
- * Cada posição pode estar ocupada por um navio e pode ser atingida por um disparo.
- */
 package iscteiul.ista.battleship;
 
 import java.util.Objects;
 
 public class Position implements IPosition {
-
     private int row;
     private int column;
     private boolean isOccupied;
     private boolean isHit;
 
-    /**
-     * Cria uma nova posição no tabuleiro.
-     *
-     * @param row    índice da linha
-     * @param column índice da coluna
-     */
     public Position(int row, int column) {
         this.row = row;
         this.column = column;
@@ -28,100 +15,35 @@ public class Position implements IPosition {
         this.isHit = false;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public int getRow() {
-        return row;
-    }
+    @Override public int getRow() { return row; }
+    @Override public int getColumn() { return column; }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public int getColumn() {
-        return column;
-    }
-
-    /**
-     * Gera o código hash baseado nas propriedades da posição.
-     *
-     * @return hash code da posição
-     */
     @Override
     public int hashCode() {
-        return Objects.hash(column, isHit, isOccupied, row);
+        return Objects.hash(row, column);
     }
 
-    /**
-     * Compara esta posição com outro objeto.
-     * Duas posições são iguais se tiverem a mesma linha e coluna.
-     *
-     * @param otherPosition objeto a comparar
-     * @return {@code true} se representam a mesma posição
-     */
     @Override
-    public boolean equals(Object otherPosition) {
-        if (this == otherPosition)
-            return true;
-
-        if (otherPosition instanceof IPosition) {
-            IPosition other = (IPosition) otherPosition;
-            return (this.getRow() == other.getRow() &&
-                    this.getColumn() == other.getColumn());
-        }
-        return false;
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof IPosition)) return false;
+        IPosition other = (IPosition) obj;
+        return row == other.getRow() && column == other.getColumn();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
     public boolean isAdjacentTo(IPosition other) {
-        return (Math.abs(this.getRow() - other.getRow()) <= 1 &&
-                Math.abs(this.getColumn() - other.getColumn()) <= 1);
+        if (other == null) return false;
+        return Math.abs(row - other.getRow()) <= 1 && Math.abs(column - other.getColumn()) <= 1;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void occupy() {
-        isOccupied = true;
-    }
+    @Override public void occupy() { isOccupied = true; }
+    @Override public void shoot() { isHit = true; }
+    @Override public boolean isOccupied() { return isOccupied; }
+    @Override public boolean isHit() { return isHit; }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void shoot() {
-        isHit = true;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean isOccupied() {
-        return isOccupied;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean isHit() {
-        return isHit;
-    }
-
-    /**
-     * Representação textual da posição.
-     *
-     * @return string com linha e coluna
-     */
     @Override
     public String toString() {
-        return "Linha = " + row + " Coluna = " + column;
+        return "(" + row + ", " + column + ")";
     }
 }
