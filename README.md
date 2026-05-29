@@ -34,3 +34,4 @@
 - O jogador regista os resultados no seu tabuleiro de ataque  
 - Ganha quem afundar todos os navios do adversário
 CI test
+CI test
